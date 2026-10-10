@@ -6,7 +6,7 @@ export type Campus = {
   ownership: string;
   address: string;
   website: string;
-  verification: "Seed - perlu verifikasi" | "Terverifikasi";
+  verification: string;
 };
 
 export const initialCampuses: Campus[] = [
