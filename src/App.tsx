@@ -197,10 +197,10 @@ function App() {
     const headers = parse(lines[0]).map(h => h.toLowerCase());
     const required = ["name", "city"];
     if (!required.every(k => headers.includes(k))) { setToast("CSV wajib memiliki kolom name dan city"); return; }
-    const imported: Campus[] = lines.slice(1).map((line, i): Campus => {
-      const values = parse(line); const get = (key: string) => values[headers.indexOf(key)] || "";
-      return { id: get("id") || `import-${Date.now()}-${i}`, name: get("name"), city: get("city"), type: get("type") || "Belum ditentukan", ownership: get("ownership") || "Belum ditentukan", address: get("address") || get("city"), website: get("website"), verification: "Seed - perlu verifikasi" as const };
-    }).filter(c => c.name && c.city);
+   const imported: Campus[] = lines.slice(1).map((line, i): Campus => {
+  const values = parse(line); const get = (key: string) => values[headers.indexOf(key)] || "";
+  return { id: get("id") || `import-${Date.now()}-${i}`, name: get("name"), city: get("city"), type: get("type") || "Belum ditentukan", ownership: get("ownership") || "Belum ditentukan", address: get("address") || get("city"), website: get("website"), verification: "Seed - perlu verifikasi" as const };
+}).filter(c => c.name && c.city);
     setCampuses(old => {
       const names = new Set(old.map(c => c.name.toLowerCase()));
       return [...old, ...imported.filter(c => !names.has(c.name.toLowerCase()))];
