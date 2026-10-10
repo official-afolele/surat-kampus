@@ -8,7 +8,6 @@ export type Campus = {
   website: string;
   verification: string;
 };
-
 export const initialCampuses: Campus[] = [
   { id: "kalbar-001", name: "Universitas Tanjungpura", city: "Kota Pontianak", type: "Universitas", ownership: "Negeri", address: "Pontianak, Kalimantan Barat", website: "https://untan.ac.id/", verification: "Seed - perlu verifikasi" },
   { id: "kalbar-002", name: "Politeknik Negeri Pontianak", city: "Kota Pontianak", type: "Politeknik", ownership: "Negeri", address: "Pontianak, Kalimantan Barat", website: "https://www.polnep.ac.id/", verification: "Seed - perlu verifikasi" },
