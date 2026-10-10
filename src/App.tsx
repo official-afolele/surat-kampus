@@ -189,22 +189,22 @@ function App() {
     const csv = rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\r\n");
     saveAs(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" }), "kampus-kalimantan-barat.csv");
   };
-  const importCsv = async (file?: File) => {
-    if (!file) return;
-    const text = await file.text();
-    const lines = text.split(/\r?\n/).filter(Boolean);
-    const parse = (line: string) => line.split(",").map(v => v.trim().replace(/^"|"$/g, "").replace(/""/g, '"'));
-    const headers = parse(lines[0]).map(h => h.toLowerCase());
-    const required = ["name", "city"];
-    if (!required.every(k => headers.includes(k))) { setToast("CSV wajib memiliki kolom name dan city"); return; }
-    const imported: Campus[] = lines.slice(1).map((line, i): Campus => {
+  const imported: Campus[] = lines.slice(1).map((line, i) => {
   const values = parse(line);
-
   const get = (key: string): string =>
     values[headers.indexOf(key)] || "";
 
-  const verification: Campus["verification"] =
-    "Seed - perlu verifikasi";
+  return {
+    id: get("id") || `import-${Date.now()}-${i}`,
+    name: get("name"),
+    city: get("city"),
+    type: get("type") || "Belum ditentukan",
+    ownership: get("ownership") || "Belum ditentukan",
+    address: get("address") || get("city"),
+    website: get("website"),
+    verification: "Seed - perlu verifikasi",
+  };
+}).filter((c) => c.name && c.city);
 
   return {
     id: get("id") || `import-${Date.now()}-${i}`,
