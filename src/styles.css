@@ -28,3 +28,4 @@
 .modal-body p{margin:6px 0}
 .modal-body ul{margin:6px 0;padding-left:18px}
 .modal-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid #35363e}
+.workspace-canvas{display:flex;flex-direction:column;flex:1;min-height:0}
