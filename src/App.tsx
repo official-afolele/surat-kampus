@@ -1,17 +1,3 @@
-// 1. Di dalam fungsi addCampus()
-const campus: Campus = {
-  id: `custom-${Date.now()}`,
-  name,
-  city: newCampusCity,
-  type: newCampusType,
-  ownership: newCampusOwnership,
-  address: `${newCampusCity}, Kalimantan Barat`,
-  website: newCampusWebsite.trim(),
-  verification: "Seed - perlu verifikasi" as Campus["verification"]
-};
-
-// 2. Di dalam fungsi importCsv()
-```tsx
 const importCsv = async (file?: File) => {
   if (!file) return;
 
@@ -42,9 +28,6 @@ const importCsv = async (file?: File) => {
       const get = (key: string): string =>
         values[headers.indexOf(key)] || "";
 
-      const verification: Campus["verification"] =
-        "Seed - perlu verifikasi";
-
       return {
         id: get("id") || `import-${Date.now()}-${index}`,
         name: get("name"),
@@ -53,7 +36,7 @@ const importCsv = async (file?: File) => {
         ownership: get("ownership") || "Belum ditentukan",
         address: get("address") || get("city"),
         website: get("website"),
-        verification
+        verification: "Seed - perlu verifikasi" as const
       };
     })
     .filter((campus) => campus.name && campus.city);
@@ -73,4 +56,3 @@ const importCsv = async (file?: File) => {
 
   setToast(`${imported.length} baris CSV diperiksa; duplikat dilewati`);
 };
-```
